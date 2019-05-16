@@ -45,13 +45,15 @@
  *  }, 10.);
  * ```
  * 
+ * @static
+ * @namespace
  * @module wtc-AnimationEvents
  * @exports WTCAnimationEvents
  * @author Liam Egan <liam@wethecollective.com>
  * @version 0.9
- * @created Nov 19, 2016
+ * @created May 16, 2019
  */
-let WTCAnimationEvents;
+let WTCAnimationEvents = {};
 
 /**
  * This function takes a node and determines the full end time of any transitions
