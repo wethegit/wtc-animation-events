@@ -14,6 +14,17 @@ A small library that allows for the detection of and response to the completion 
 $ npm install wtc-animation-events
 ```
 ## Usage
+This library has two general uses. The first is to determine how much time a particular transtition will take to complete 
+(including, optionally, the transition time of all of the children of the element), the second is to add a listener to the 
+element that triggers when all transitions are complete.
+
+### detectAnimationEndTime(element[, depth])
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| node | `HTMLElement`  | The node to detect the transition time for. | &nbsp; |
+| depth | `Number`  | How deep to test for transitions, defaults to null, which means no depth limitation | *Optional* |
+
 Firstly, you can use it to find the transition time for an element and all of that element's children. Consider the following HTML and CSS
 ```html
 <style>
