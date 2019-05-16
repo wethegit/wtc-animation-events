@@ -15,7 +15,7 @@
  * 
  * | Name | Type | Description |  |
  * | ---- | ---- | ----------- | -------- |
- * | node | `HTMLElement`  | The node to detect the transition time for. | &nbsp; |
+ * | element | `HTMLElement`  | The node to detect the transition time for. | &nbsp; |
  * | depth | `Number`  | How deep to test for transitions, defaults to null, which means no depth limitation | *Optional* |
  * 
  * Firstly, you can use it to find the transition time for an element and all of that element's children. Consider the following HTML and CSS
@@ -54,6 +54,26 @@
  *    module.className = module.className + ' active';
  *    console.log(WTCAnimationEvents.default.detectAnimationEndTime(module)); // 1500
  *  }, 10.);
+ * ```
+ * 
+ * ### addEndEventListener(element [, listener [, depth]])
+ * 
+ * | Name | Type | Description |  |
+ * | ---- | ---- | ----------- | -------- |
+ * | element | `HTMLElement`  | The node to detect the transition time for. | &nbsp; |
+ * | listener | `function`  | The function to call when all of the transitions are complete, this function is expected to return an object, to which will be appended the amount of time that has passed in transition  | *Optional* |
+ * | depth | `Number`  | How deep to test for transitions, defaults to null, which means no depth limitation | *Optional* |
+ * 
+ * This method attaches a single-run pseudo event listener to the element that returns a promise that represents the resolution of the animation.
+ * Calling `then` on this promise will allow you to run a method when the promise completes.
+ * 
+ * ```javascript
+ * 
+ *  Animation.
+ *    addEndEventListener(DOMTarget, null, this.animationDepth).
+ *    then(function(resolver) {
+ *      console.log(resolver.time); // 1500
+ *    }.bind(this))
  * ```
  * 
  * @static
@@ -142,7 +162,7 @@ const addEndEventListener = function(node, listener, depth) {
   }
   return new Promise(function(resolve, reject) {
     var time = detectAnimationEndTime(node, depth);
-    var timeout = setTimeout(function() {
+    setTimeout(function() {
       var returner = listener();
       returner.time = time;
       resolve(returner);
